@@ -1,12 +1,16 @@
 package ec.edu.ups.entity.citas;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,7 +28,6 @@ public class Profesion implements Serializable{
 	@Id
 	@Column(name="pro_id")
 	@NotNull
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PROFESION")
 	private int proId;
 	
@@ -34,6 +37,9 @@ public class Profesion implements Serializable{
 	@Column(name="pro_descripcion",length=50)
 	private String proDescripcion;
 
+	@OneToMany(cascade= {CascadeType.ALL})
+	@JoinColumn(name="profesion",referencedColumnName="pro_id")
+	private List<Empleado>empleados;
 	
 	/**
 	 * encapsulameinto
@@ -60,6 +66,14 @@ public class Profesion implements Serializable{
 
 	public void setProDescripcion(String proDescripcion) {
 		this.proDescripcion = proDescripcion;
+	}
+	
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
 	}
 
 	@Override
