@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+</h:head>
+
+<f:metadata>
+<f:viewParam name="id" value="#{personaControlador.id}"></f:viewParam>
+</f:metadata>
+ 
+<body> 
+<h1>CREAR PERSONA</h1>
+
+<h:form>
+<h:messages globalOnly="true"/>
+<h:inputHidden value="#{personaControlador.id}" />
+<h:panelGrid columns="3">
+<h:outputLabel value="Cedula:" for="cedula"/>
+<h:inputText value="#{personaControlador.persona.cedula}" id="cedula" />
+<h:message for="cedula"/>
+
+<h:outputLabel value="Nombres:" for="nombre"/>
+<h:inputText value="#{personaControlador.persona.nombres}" id="nombre" />
+<h:message for="nombre"/>
+
+
+<h:outputLabel value="Email:" for="email"/>
+<h:inputText value="#{personaControlador.persona.email}" id="email" />
+<h:message for="email"/>
+
+<h:outputLabel value="Fecha Nacimiento:" for="fecha"/>
+<h:inputText value="#{personaControlador.persona.fecha_Nacimiento}" id="fecha" >
+<f:convertDateTime pattern="yyyy/MM/dd" />
+</h:inputText>
+<h:message for="fecha"/>
+
+<h:commandButton action="#{personaControlador.guardar2()}" value="REGISTRAR" />
+
+
+</h:panelGrid>
+<h:commandButton action="listado-personas" immediate="true" value="listado personas" />
+</h:form>
+</body> 
+</html>

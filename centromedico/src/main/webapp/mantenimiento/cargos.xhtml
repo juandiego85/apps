@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:jsf="http://xmlns.jcp.org/jsf" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"	
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:b="http://bootsfaces.net/ui"	>
+
+	<ui:composition template="/resources/template/default.xhtml">
+	<ui:param name="pageTitle" value="alumnos" />
+	<ui:define name="content">
+	<p:growl id="msgGrowl" redisplay="false" showDetail="true" rendered="#{not facesContext.validationFailed}" for="growl"
+	                 			sticky="false" life="5000" escape="true" />
+	  <div class="right_col" role="main">
+        <div class="row">
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <div class="x_panel">
+            <div class="x_title">
+                 <h2>Registrar Cargos</h2>
+                 <div class="clearfix"></div>
+            </div>
+             <div class="x_content">
+               <br />
+               <h:form prependId="false" class="form-horizontal form-label-left">
+             	<div class="form-group">
+	            	<label class="control-label col-md-4 col-sm-4 col-xs-12">Nombre:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="idnombre" value="#{cargoController.cargo.carNombre}" 
+                      				class="form-control" 
+                      				ph:placeholder="Nombre"
+                      				>
+                      </h:inputText>
+                    </div>
+                 </div>
+                 
+                 
+              <div class="form-group">
+	            	<label class="control-label col-md-4 col-sm-4 col-xs-12">Estado:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <p:selectBooleanCheckbox value="#{cargoController.estado}" >
+								<p:ajax event="change" update="msgcargo"></p:ajax>
+					   </p:selectBooleanCheckbox>
+                    </div>
+                 </div>
+                <div class="form-group">
+				   <div class="col-md-8 col-md-offset-2">
+				     <div align="center">
+				          <p:messages id="msgcargo" showDetail="true" redisplay="false" ></p:messages>
+	                 </div>
+                  </div>
+	            </div>
+                
+                
+                
+                <div class="col-md-12 col-sm-12 col-xs-12">
+		           <div align="center">
+	                    <p:commandButton value="REGISTRAR" action="#{cargoController.guardar2()}"
+	                             class="btn btn-sm btn-primary btn-block"  
+	              				 update="msgcargo cargos" 
+	              				 onstart="PF('blockUIWidgetC').block()" oncomplete="PF('blockUIWidgetC').unblock();">
+	              				 
+	                	</p:commandButton>
+	                	
+	                	
+	                	
+		              <pe:blockUI widgetVar="blockUIWidgetC">  
+					    <h:panelGrid columns="2">  
+					        <h:graphicImage library="img" name="loader.gif"  
+					                        style="margin-right: 12px; vertical-align: middle;"/>  
+					        <h:outputText value="registrando cargo..." style="white-space: nowrap;"/>  
+					    </h:panelGrid>  
+					</pe:blockUI>
+	               </div>
+                </div>
+             
+             </h:form>
+             </div>
+             </div>
+            </div>
+           </div>
+           
+           
+         
+        <div class="row">
+         <div class="col-md-6 col-sm-6 col-xs-12">
+         <p:dataTable id="cargos" value="#{cargoController.cargos}" var="data"
+			        	 emptyMessage="No existen datos" style="margin-top: 10px;" >  
+			           
+			           <p:column headerText="Codigo" width="100">  
+			                <h:outputText value="#{data.carId}"/>  
+			            </p:column>
+			            
+			            <p:column headerText="Nombre" width="200">  
+			                <h:outputText value="#{data.carNombre}"/>  
+			            </p:column>
+			            <p:column headerText="Fecha de registro" >  
+			                <h:outputText value="#{data.carFecharegistro}"/>  
+			            </p:column>
+			            <p:column headerText="Estado" width="100">  
+			                <h:outputText value="#{data.carEstado}"/>  
+			            </p:column>     
+			              
+			        </p:dataTable>
+         </div>
+         </div>
+         
+           
+           
+           
+         </div>  
+         
+	</ui:define>
+</ui:composition>
+</html>
