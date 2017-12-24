@@ -17,7 +17,7 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<meta name="description" content="Sistema en clases" />
 			<meta name="author" content="SISTEMAS-ESTUDIANTE" />
-			<title>#{empty pageTitle ? 'Page Title' : pageTitle} - UPS</title>
+			<title>#{empty pageTitle ? 'Page Title' : pageTitle} - CITAS</title>
 		
 			<link href="../resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 		    <link href="../resources/css/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
@@ -63,10 +63,20 @@
 		                <h3>Servicios</h3>
 		                <ul class="nav side-menu">
 		                  
+		                  <li><a><i class="fa fa-credit-card"></i>Control Medico <span class="fa fa-chevron-down"></span></a>
+		                    <ul class="nav child_menu">
+		                       <li><a href="/centromedico/controlmedico/pacientes.jsf">Pacientes</a></li>
+		                       
+		                    </ul>
+		                  </li>
+		                  
 		                  <li><a><i class="fa fa-credit-card"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
 		                    <ul class="nav child_menu">
 		                       <li><a href="/centromedico/mantenimiento/cargos.jsf">Cargos</a></li>
 		                       <li><a href="/centromedico/mantenimiento/profesion.jsf">Profesiones</a></li>
+		                       <li><a href="/centromedico/mantenimiento/empleado.jsf">Empleados</a></li>
+		                       <li><a href="/centromedico/mantenimiento/especialidad.jsf">Especialidad</a></li>
+		                       <li><a href="/centromedico/mantenimiento/asignarespecialidad.jsf">Asignar Especialidad</a></li>
 		                    </ul>
 		                  </li>
 		                  

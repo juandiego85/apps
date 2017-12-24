@@ -15,9 +15,9 @@ import javax.validation.constraints.Size;
 @Table(name="tbl_usuario")
 public class Usuario {
 	@Id
-	@Column(name="usu_id")
+	@Column(name="id")
 	@NotNull
-	private int usuId;
+	private int id;
 	
 	@Column(name="usu_nombre")
 	@Size(min=6,max=15)

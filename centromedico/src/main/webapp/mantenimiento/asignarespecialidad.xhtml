@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"	
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"	>
+
+	<ui:composition template="/resources/template/default.xhtml">
+	<ui:param name="pageTitle" value="especialidades" />
+	<ui:define name="content">
+	<div class="right_col">
+        <div class="row">
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <div class="x_panel">
+            <div class="x_title">
+                 <h2>Asignar Especialidad</h2>
+                 <div class="clearfix"></div>
+            </div>
+             <div class="x_content">
+               <br />
+               <h:form prependId="false" class="form-horizontal form-label-left">
+             	
+             	
+               <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Empleado:</label>
+               <div class="col-md-6 col-sm-6 col-xs-12" >
+                 <p:selectOneMenu value="#{asignarEspecialidadBean.idEmpleadoSelected}" >
+                 <f:selectItem itemLabel="seleccione un empleado" itemValue="#{null}" noSelectionOption="true"/>
+                 <f:selectItems value="#{asignarEspecialidadBean.empleados}" var="obj" itemValue="#{obj.id}" itemLabel="#{obj.nombres}"/>
+                 </p:selectOneMenu>
+               </div>
+               </div>
+               
+               <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Especialidad</label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+               <p:selectOneMenu value="#{asignarEspecialidadBean.empleadoEspecialidad.especialidad}">
+               	<f:selectItem itemLabel="seleccione una especialidad" itemValue="#{null}" noSelectionOption="true"/>
+               	<f:selectItems value="#{asignarEspecialidadBean.especialidades}" var="obj" itemValue="#{obj}" itemLabel="#{obj.espNombre}"/>
+               	<f:converter converterId="Converters.EspecialidadConverter"></f:converter>
+               </p:selectOneMenu>
+               </div>
+               
+               </div>  
+                 
+                
+                <div class="col-md-12 col-sm-12 col-xs-12">
+		           <div align="center">
+	                    <p:commandButton value="REGISTRAR" action="#{asignarEspecialidadBean.registraEmpEspecialidad()}"
+	                             class="btn btn-sm btn-primary btn-block"  
+	              				 update="msg2 " 
+	              				 onstart="PF('blockUIWidgetC').block()" oncomplete="PF('blockUIWidgetC').unblock();">
+	              				 
+	                	</p:commandButton>
+	                	
+	                	
+	                	
+		              <pe:blockUI widgetVar="blockUIWidgetC">  
+					    <h:panelGrid columns="2">  
+					        <h:graphicImage library="img" name="loader.gif"  
+					                        style="margin-right: 12px; vertical-align: middle;"/>  
+					        <h:outputText value="registrando empleado.." style="white-space: nowrap;"/>  
+					    </h:panelGrid>  
+					</pe:blockUI>
+	               </div>
+                </div>
+             
+              <div class="form-group">
+				   <div class="col-md-8 col-md-offset-2">
+				     <div align="center">
+				          <p:messages id="msg2" showDetail="true" redisplay="false" ></p:messages>
+	                 </div>
+                  </div>
+	            </div>
+             
+             
+             </h:form>
+             </div>
+             </div>
+            </div>
+           </div>
+                 
+             
+            
+           </div>
+	</ui:define>
+	</ui:composition>
+</html>

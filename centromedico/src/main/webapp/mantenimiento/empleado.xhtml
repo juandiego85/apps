@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"	
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"	>
+
+	<ui:composition template="/resources/template/default.xhtml">
+	<ui:param name="pageTitle" value="empleados" />
+	<ui:define name="content">
+	<div class="right_col">
+        <div class="row">
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <div class="x_panel">
+            <div class="x_title">
+                 <h2>Registrar Empleado</h2>
+                 <div class="clearfix"></div>
+            </div>
+             <div class="x_content">
+               <br />
+               <h:form prependId="false" class="form-horizontal form-label-left">
+             	<p:outputPanel id="panelempleado">
+             	<div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Identificacion:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtid" value="#{empleadoBean.persona.perIdentificacion}" 
+                      				class="form-control" 
+                      				ph:placeholder="Cedula"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtid" display="text"></p:message>
+                    </div>
+                 </div>
+             	<div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtnombre" value="#{empleadoBean.persona.perNombre}" 
+                      				class="form-control" 
+                      				ph:placeholder="Nombre"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtnombre" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Apellidos:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtapellido" value="#{empleadoBean.persona.perApellido}" 
+                      				class="form-control" 
+                      				ph:placeholder="Apellidos"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtapellido" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Genero:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <p:selectOneRadio id="genero" value="#{empleadoBean.persona.perGenero}" 
+                        			style="margin-bottom:10px" required="true"
+                        			requiredMessage="Seleccione un genero">
+				            <f:selectItem itemLabel="Masculino" itemValue="M" />
+				            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+				 	  </p:selectOneRadio>
+                      <p:message for="genero" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Telefono:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txttelefono" value="#{empleadoBean.persona.perTelefono}" 
+                      				class="form-control" 
+                      				ph:placeholder="telefono"
+                      				>
+                      </h:inputText>
+                      <p:message for="txttelefono" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Email:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtemail" value="#{empleadoBean.persona.perEmail}" 
+                      				class="form-control" 
+                      				ph:placeholder="Email"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtemail" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+               <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Cargo:</label>
+               <div class="col-md-6 col-sm-6 col-xs-12" >
+                 <p:selectOneMenu value="#{empleadoBean.empleado.cargo}" >
+                 <f:selectItem itemLabel="seleccione un cargo" itemValue="#{null}" noSelectionOption="true"/>
+                 <f:selectItems value="#{empleadoBean.cargos}" var="obj" itemValue="#{obj}" itemLabel="#{obj.carNombre}"/>
+                 <f:converter converterId="Converters.CargoConverter"></f:converter>
+                 <f:ajax render="@this" execute="@this"></f:ajax>
+                 </p:selectOneMenu>
+               </div>
+               </div>
+               
+               <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Profesión</label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+               <p:selectOneMenu value="#{empleadoBean.empleado.profesion}">
+               	<f:selectItem itemLabel="seleccione un cargo" itemValue="#{null}" noSelectionOption="true"/>
+               	<f:selectItems value="#{empleadoBean.profesiones}" var="obj" itemValue="#{obj}" itemLabel="#{obj.proNombre}"/>
+               	<f:converter converterId="Converters.ProfesionConverter"></f:converter>
+               </p:selectOneMenu>
+               </div>
+               
+               </div>  
+                 
+                </p:outputPanel> 
+              
+                
+                
+                
+                
+                <div class="col-md-12 col-sm-12 col-xs-12">
+		           <div align="center">
+	                    <p:commandButton value="REGISTRAR" action="#{empleadoBean.registrarEmpleado()}"
+	                             class="btn btn-sm btn-primary btn-block"  
+	              				 update="msgempleado panelempleado " 
+	              				 onstart="PF('blockUIWidgetC').block()" oncomplete="PF('blockUIWidgetC').unblock();">
+	              				 
+	                	</p:commandButton>
+	                	
+	                	
+	                	
+		              <pe:blockUI widgetVar="blockUIWidgetC">  
+					    <h:panelGrid columns="2">  
+					        <h:graphicImage library="img" name="loader.gif"  
+					                        style="margin-right: 12px; vertical-align: middle;"/>  
+					        <h:outputText value="registrando empleado.." style="white-space: nowrap;"/>  
+					    </h:panelGrid>  
+					</pe:blockUI>
+	               </div>
+                </div>
+             
+             	<div class="form-group">
+				   <div class="col-md-8 col-md-offset-2">
+				     <div align="center">
+				          <p:messages id="msgempleado" showDetail="true" redisplay="false" ></p:messages>
+	                 </div>
+                  </div>
+	            </div>
+             
+             </h:form>
+             </div>
+             </div>
+            </div>
+           </div>
+                 
+             
+            
+           </div>
+	</ui:define>
+	</ui:composition>
+</html>

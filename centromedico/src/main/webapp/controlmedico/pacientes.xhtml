@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"	
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"	>
+
+	<ui:composition template="/resources/template/default.xhtml">
+	<ui:param name="pageTitle" value="empleados" />
+	<ui:define name="content">
+	<p:growl id="msggrowl" for="msg1"></p:growl>
+	<div class="right_col">
+        <div class="row">
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <div class="x_panel">
+            <div class="x_title">
+                 <h2>Registrar Paciente</h2>
+                 <div class="clearfix"></div>
+            </div>
+             <div class="x_content">
+               <br />
+               <h:form prependId="false" class="form-horizontal form-label-left">
+             	<div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Identificacion:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtid" value="#{pacientesBean.persona.perIdentificacion}" 
+                      				class="form-control" 
+                      				ph:placeholder="Cedula"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtid" display="text"></p:message>
+                    </div>
+                 </div>
+             	<div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtnombre" value="#{pacientesBean.persona.perNombre}" 
+                      				class="form-control" 
+                      				ph:placeholder="Nombre"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtnombre" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Apellidos:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtapellido" value="#{pacientesBean.persona.perApellido}" 
+                      				class="form-control" 
+                      				ph:placeholder="Apellidos"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtapellido" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Genero:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <p:selectOneRadio id="genero" value="#{pacientesBean.persona.perGenero}" 
+                        			style="margin-bottom:10px" required="true"
+                        			requiredMessage="Seleccione un genero">
+				            <f:selectItem itemLabel="Masculino" itemValue="M" />
+				            <f:selectItem itemLabel="Femenino" itemValue="F"/>
+				 	  </p:selectOneRadio>
+                      <p:message for="genero" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Telefono:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txttelefono" value="#{pacientesBean.persona.perTelefono}" 
+                      				class="form-control" 
+                      				ph:placeholder="telefono"
+                      				>
+                      </h:inputText>
+                      <p:message for="txttelefono" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+	            	<label class="control-label col-md-3 col-sm-3 col-xs-12">Email:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <h:inputText id="txtemail" value="#{pacientesBean.persona.perEmail}" 
+                      				class="form-control" 
+                      				ph:placeholder="Email"
+                      				>
+                      </h:inputText>
+                      <p:message for="txtemail" showDetail="text"></p:message>
+                    </div>
+                 </div>
+                 
+                 <div class="form-group">
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha Nacimiento:</label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                 <h:inputText id="fecNac" value="#{pacientesBean.paciente.pacFecNacimiento}">
+                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                 <f:ajax update="txtedad msgfechanac" listener="#{pacientesBean.retornaEdad()}" event="blur" execute="@this"></f:ajax>
+                 </h:inputText>
+                 	<p:message for="fecNac" showDetail="text" id="msgfechanac"></p:message>
+                 </div>
+                 </div>
+                                
+                 <div class="form-group">
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Edad:</label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                 <h:outputText id="txtedad" value="#{pacientesBean.paciente.pac_edad}" />
+                 </div>
+                 </div>
+                 
+                 <div class="form-group">
+                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Dirección:</label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                 <h:inputText value="#{pacientesBean.paciente.pacDireccion}" />
+                 </div>
+                 </div>
+              
+                <div class="col-md-12 col-sm-12 col-xs-12">
+		           <div align="center">
+	                    <p:commandButton value="REGISTRAR" action="#{pacientesBean.registrarPaciente()}"
+	                             class="btn btn-sm btn-primary btn-block"  
+	              				 update="msgpaciente msggrowl" 
+	              				 onstart="PF('blockUIWidgetC').block()" oncomplete="PF('blockUIWidgetC').unblock();">
+	              				 
+	                	</p:commandButton>
+	                	
+	                	
+	                	
+		              <pe:blockUI widgetVar="blockUIWidgetC">  
+					    <h:panelGrid columns="2">  
+					        <h:graphicImage library="img" name="loader.gif"  
+					                        style="margin-right: 12px; vertical-align: middle;"/>  
+					        <h:outputText value="registrando el paciente.." style="white-space: nowrap;"/>  
+					    </h:panelGrid>  
+					</pe:blockUI>
+	               </div>
+                </div>
+             
+             <div class="form-group">
+				   <div class="col-md-8 col-md-offset-2">
+				     <div align="center">
+				          <p:messages id="msgpaciente" showDetail="true" redisplay="false" for="msg2" ></p:messages>
+	                 </div>
+                  </div>
+	            </div>
+             </h:form>
+             </div>
+             </div>
+            </div>
+           </div>
+                 
+             
+            
+           </div>
+	</ui:define>
+	</ui:composition>
+</html>

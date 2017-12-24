@@ -1,12 +1,14 @@
-package ups.edu.ec.utils;
+package ups.edu.ec.daos;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import ups.edu.ec.utils.JPAException;
 
 
 /**
@@ -60,7 +62,7 @@ public class JPAGenericDAO<T,ID>
      * @param id
      * @param entidad
      */
-    public void guardar(ID id,T entidad)
+    public void guardar(ID id,T entidad)throws JPAException 
 	{
 		T p=leer(id);
 		if(p==null)
@@ -74,9 +76,18 @@ public class JPAGenericDAO<T,ID>
      * Metodo para insertar en la base de datos
      * @param entidad
      */
-    public void insertar(T entidad) 
+    public void insertar(T entidad) throws JPAException 
     {
-          em.persist(entidad);
+       try 
+       {
+    	   em.persist(entidad);   
+       }catch(Exception e)
+       {
+    	   String msg = JPAException.getErrorMessage(e);
+    	   log.log(Level.SEVERE, msg, e);
+    	   throw new JPAException(e);
+       }
+    	
     }
 
     
@@ -127,7 +138,9 @@ public class JPAGenericDAO<T,ID>
 		return lista;
 	}
     
- 
+    
+    
+    
   
 
 }
